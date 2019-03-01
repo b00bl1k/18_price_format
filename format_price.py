@@ -5,15 +5,15 @@ import sys
 def format_price(price):
     if isinstance(price, (int, float)) or \
             (isinstance(price, str) and
-             re.match("\\d+(\\.\\d+)?", price)):
+             re.match(r"\d+(\.\d+)?", price)):
         price = float(price)
     else:
         raise ValueError("Invalid value")
 
     if price.is_integer():
-        price_str = f"{price:,.0f}"
+        price_str = "{0:,.0f}".format(price)
     else:
-        price_str = f"{price:,.2f}"
+        price_str = "{0:,.2f}".format(price)
 
     return price_str.replace(",", " ")
 
