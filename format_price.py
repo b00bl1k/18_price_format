@@ -1,14 +1,13 @@
-import re
 import sys
 
 
 def format_price(price):
-    if isinstance(price, (int, float)) or \
-            (isinstance(price, str) and
-             re.match(r"\d+(\.\d+)?", price)):
+    try:
         price = float(price)
-    else:
-        raise ValueError("Invalid value")
+    except ValueError:
+        return None
+    except TypeError:
+        return None
 
     if price.is_integer():
         price_str = "{0:,.0f}".format(price)
@@ -21,4 +20,8 @@ def format_price(price):
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         sys.exit("Argument error.\nUsage: python format_price.py <value>")
-    print(format_price(sys.argv[1]))
+    formatted_price = format_price(sys.argv[1])
+    if formatted_price:
+        print(formatted_price)
+    else:
+        sys.exit("Invalid value")

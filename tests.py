@@ -19,13 +19,14 @@ class TestFormatPrice(unittest.TestCase):
     def test_float(self):
         self.assertEqual("1 234.12", format_price(1234.12))
 
-    def test_value_error(self):
-        with self.assertRaises(ValueError):
-            format_price("123a.54")
-        with self.assertRaises(ValueError):
-            format_price(None)
-        with self.assertRaises(ValueError):
-            format_price([123])
+    def test_string_value_error(self):
+        self.assertEqual(None, format_price("123a.54"))
+
+    def test_none(self):
+        self.assertEqual(None, format_price(None))
+
+    def test_list(self):
+        self.assertEqual(None, format_price([123]))
 
 
 if __name__ == "__main__":
