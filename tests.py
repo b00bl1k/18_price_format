@@ -1,4 +1,5 @@
 import unittest
+from decimal import Decimal
 from format_price import format_price
 
 
@@ -27,6 +28,15 @@ class TestFormatPrice(unittest.TestCase):
 
     def test_list(self):
         self.assertEqual(None, format_price([123]))
+
+    def test_bool(self):
+        self.assertEqual(None, format_price(True))
+
+    def test_round(self):
+        self.assertEqual("0", format_price("0.0000000001"))
+
+    def test_decimal(self):
+        self.assertEqual("0.10", format_price(Decimal(".1")))
 
 
 if __name__ == "__main__":

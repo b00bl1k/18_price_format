@@ -1,12 +1,10 @@
 import sys
 
 
-def format_price(price):
+def format_price(price, precision=2):
     try:
-        price = float(price)
+        price = round(float(str(price)), precision)
     except ValueError:
-        return None
-    except TypeError:
         return None
 
     if price.is_integer():
